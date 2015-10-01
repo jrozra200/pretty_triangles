@@ -1,0 +1,16 @@
+---
+title: "README"
+author: "Jacob Rozran"
+date: "October 1, 2015"
+output: html_document
+---
+
+This is a simple program that creates a Sierpinski triangle. From a chosen 
+starting point, the script goes halfway towards a random corner of the 
+equilateral triangle and creates a new point. It then takes that point and goes
+halfway to another random corner. This process is repeated again and again
+and the points are recorded throughout. 
+
+The impetus for creating this was a class assignment. For more information on
+the program, process, and more, please visit my blog:
+jakelearnsdatascience.wordpress.com/
