@@ -96,6 +96,10 @@ createSquare <- function(a = 10, n = 30000, startx = a / 2,
         corner2 <- data.frame(x = 0, y = a)
         corner3 <- data.frame(x = a, y = a) 
         corner4 <- data.frame(x = a, y = 0)
+        midpoint1 <- data.frame(x = 0, y = a / 2)
+        midpoint2 <- data.frame(x = a / 2, y = a)
+        midpoint3 <- data.frame(x = a, y = a / 2)
+        midpoint4 <- data.frame(x = a / 2, y = 0)
         
         ## CREATE THE STARTING POINT                                         ##
         starting_point <- data.frame(x = startx, y = starty)
@@ -108,22 +112,30 @@ createSquare <- function(a = 10, n = 30000, startx = a / 2,
         for(i in 1:n){
                 ## CREATE A RANDOM NUMBER BETWEEN 1 AND 4 (ONE FOR EACH      ##
                 ## CORNER)                                                   ##
-                rand_num <- sample(1:4, 1)
+                rand_num <- sample(1:8, 1)
                 
                 ## PICK A CORNER TO GO TOWARDS BASED ON THE RANDOM NUMBER    ##
-                tmp_corn <- if(rand_num == 1){
+                tmp_corn <- if (rand_num == 1) { 
                         corner1
-                } else if(rand_num == 2){
+                } else if (rand_num == 2) {
                         corner2
-                } else if(rand_num == 3){
+                } else if (rand_num == 3) {
                         corner3
-                } else {
+                } else if (rand_num == 4) {
                         corner4
+                } else if (rand_num == 5) {
+                        midpoint1
+                } else if (rand_num == 6) {
+                        midpoint2
+                } else if (rand_num == 7) {
+                        midpoint3
+                } else{
+                        midpoint4
                 }
                 
                 ## FIND THE DISTANCE THAT IS HALFWAY BETWEEN THE CORNER AND  ##
                 ## POINT WE ARE CURRENTLY AT                                 ##
-                tmp_dist <- sqrt((all_points$x[i] - tmp_corn$x)^2 + (all_points$y[i] - tmp_corn$y)^2) / 2
+                tmp_dist <- sqrt((all_points$x[i] - tmp_corn$x)^2 + (all_points$y[i] - tmp_corn$y)^2) * (2 / 3)
                 
                 ## FIND THE SLOPE FROM THE CURRENT POINT TO THE CORNER POINT ##
                 tmp_slope <- (all_points$y[i] - tmp_corn$y) / (all_points$x[i] - tmp_corn$x)
@@ -164,7 +176,8 @@ createSquare <- function(a = 10, n = 30000, startx = a / 2,
         }
         
         ## ADD THE CORNERS TO THE LIST OF POINTS TO BE PLOTTED               ##
-        all_points <- rbind(all_points, corner1, corner2, corner3, corner4)
+        all_points <- rbind(all_points, corner1, corner2, corner3, corner4,
+                            midpoint1, midpoint2, midpoint3, midpoint4)
         
         ## PLOT THE POINTS                                                   ##
         plot(all_points$x, all_points$y, pch = ".", xlab = "", ylab = "")
