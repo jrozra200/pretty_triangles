@@ -26,7 +26,9 @@ createTriange <- function(a = 10, n = 30000, startx = a / 2,
                 rand_num <- sample(1:3, 1)
                 
                 ## PICK A CORNER TO GO TOWARDS BASED ON THE RANDOM NUMBER    ##
-                tmp_corn <- if(rand_num == 1){
+                tmp_corn <- if(i == 1){
+                        corner1
+                } else if(rand_num == 1){
                         corner1
                 } else if(rand_num == 2){
                         corner2
